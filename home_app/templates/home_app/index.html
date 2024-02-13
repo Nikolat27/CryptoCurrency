@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container" align="center">
+        <h1>Cryptocurrency Prices</h1>
+        <img src="{% static "img/laravel.png" %}" width="300" height="300" alt="">
+        <div class="conversion">
+            <input type="number" id="amount" placeholder="Enter Amount">
+            <br><br>
+            <label style="text-align: center" for="cryptos" class="form-label">Choose your Crypto from the list:</label>
+            <input class="form-control" list="cryptos" name="cryptos" id="cryptos" style="width: auto">
+            <datalist id="browsers">
+                <option value="Bitcoin">
+                <option value="Ethereum">
+            </datalist>
+            <button>Convert</button>
+            <p id="result"></p>
+        </div>
+    </div>
+{% endblock %}

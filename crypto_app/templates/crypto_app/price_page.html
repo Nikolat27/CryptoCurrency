@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container" align="center">
+        <h1>Cryptocurrency Prices</h1>
+        <img src="{% static "img/laravel.png" %}" width="300" height="300" alt="">
+        <br><br>
+        <div class="conversion">
+            <select id="currency" class="form-select" style="width: auto">
+                {% for currency in cryptos %}
+                    <option value="{{ currency.name }}">{{ currency.name }}</option>
+                {% endfor %}
+                <!-- Add more cryptocurrency options here -->
+            </select>
+            <br>
+            <p style="font-weight: bold">({{ time }})</p>
+            <input type="text" disabled id="crypto_price" class="form-control" style="width: auto">
+            <br>
+            <button class="btn-danger">Submit</button>
+            <br><br>
+            {{ price }}
+        </div>
+    </div>
+{% endblock %}
