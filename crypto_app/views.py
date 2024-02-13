@@ -6,6 +6,7 @@ import requests
 # Create your views here.
 def price_page(request):
     crypto_name = request.GET.get("currency")
+    print(crypto_name)
     if crypto_name:
         cryptos = Crypto.objects.all()
         url = f"https://api.coingecko.com/api/v3/coins/{crypto_name}"
