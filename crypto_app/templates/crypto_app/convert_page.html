@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container" align="center">
+        <h1>Cryptocurrency Converter</h1>
+        <img id="picture" src="{% static "img/Cryptocurrency-investing-megatrends-chapter-3.jpg" %}" width="600"
+             height="300" alt="">
+        <br><br>
+        <div class="conversion">
+            <form id="cryptoConvert" method="POST">
+                {% csrf_token %}
+                Considered Amount:
+                <br><br>
+                <input type="text" {% if request.GET.amount %}value="{{ request.GET.amount }}"{% endif %} id="amount"
+                       class="form-control" style="width: auto">
+                From
+                <br><br>
+                <select id="firstCurrency" class="form-select" style="width: auto">
+                    {% if request.GET.firstCrypto %}
+                        <option value="{{ request.GET.firstCrypto }}">{{ request.GET.firstCrypto }}</option>
+                    {% endif %}
+                    {% for currency in currencies %}
+                        <option value="{{ currency.name }}">{{ currency.name }}</option>
+                    {% endfor %}
+                    <!-- Add more cryptocurrency options here -->
+                </select>
+                To
+                <select id="secondCurrency" class="form-select" style="width: auto">
+                    {% if request.GET.secondCrypto %}
+                        <option value="{{ request.GET.secondCrypto }}">{{ request.GET.secondCrypto }}</option>
+                    {% endif %}
+                    {% for currency in currencies %}
+                        <option value="{{ currency.name }}">{{ currency.name }}</option>
+                    {% endfor %}
+                    <!-- Add more cryptocurrency options here -->
+                </select>
+                <br>
+                In
+                <select id="thirdCurrency" class="form-select" style="width: auto">
+                    <option value="usd">usd (USA Dollar $)</option>
+                    <option value="cad">cad (Canadian Dollar $)</option>
+                    <option value="jpy">jpy (Japanese Yen ¥)</option>
+                    <option value="eur">eur (Euro €)</option>
+                    <!-- Add more cryptocurrency options here -->
+                </select>
+                <br>
+                =
+                <input type="text" value="{{ price }}" disabled id="crypto_price" class="form-control"
+                       style="width: auto">
+                <br>
+                <button type="submit" class="btn-primary btn-lg" onclick="ConvertForm()">Convert</button>
+            </form>
+            <br><br>
+        </div>
+    </div>
+    <script>
+        function ConvertForm() {
+            let firstCrypto = document.getElementById('firstCurrency').value;
+            let amount = document.getElementById('amount').value;
+            let secondCrypto = document.getElementById('secondCurrency').value;
+            let currency = document.getElementById('thirdCurrency').value;
+            let form = document.getElementById('cryptoConvert');
+            form.action = "{% url "price_page:convert" %}?firstCrypto=" + firstCrypto + "&secondCrypto="
+                + secondCrypto + "&currency=" + currency + "&amount=" + amount;
+            form.submit();
+        }
+    </script>
+{% endblock %}

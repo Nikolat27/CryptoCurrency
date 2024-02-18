@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
     <div class="container" align="center">
         <h1>Cryptocurrency Prices</h1>
-        <img src="{% static "img/laravel.png" %}" width="300" height="300" alt="">
+        <img id="picture" src="{% static "img/cryptocurrency-f6026a2012a14aaa9ef8a1c277fde0f7.jpg" %}" width="600" height="300" alt="">
         <br><br>
         <div class="conversion">
             <form id="priceForm" method="POST">
                 {% csrf_token %}
-                <select id="currency" class="form-select" style="width: auto">
+                <select id="crypto" class="form-select" style="width: auto">
                     {% for currency in cryptos %}
                         <option value="{{ currency.name }}">{{ currency.name }}</option>
                     {% endfor %}
                     <!-- Add more cryptocurrency options here -->
                 </select>
+                To
+                <select id="currency" class="form-select" style="width: auto">
+                    <option value="usd">usd (USA Dollar $)</option>
+                    <option value="cad">cad (Canadian Dollar $)</option>
+                    <option value="jpy">jpy (Japanese Yen ¥)</option>
+                    <option value="eur">eur (Euro €)</option>
+                    <!-- Add more cryptocurrency options here -->
+                </select>
                 <br>
-                <p style="font-weight: bold">{{ time }}</p>
                 <input type="text" value="{{ price }}" disabled id="crypto_price" class="form-control"
                        style="width: auto">
                 <br>
-                <button type="button" class="btn-danger btn-lg" onclick="submitForm()">Submit</button>
+                <button type="submit" class="btn-warning btn-lg" onclick="submitForm()">Submit</button>
             </form>
             <br><br>
         </div>
     </div>
     <script>
         function submitForm() {
+            let selectedCrypto = document.getElementById('crypto').value;
             let selectedCurrency = document.getElementById('currency').value;
             let form = document.getElementById('priceForm');
-            form.action = "{% url "price_page:price" %}?currency=" + selectedCurrency;
+            form.action = "{% url "price_page:price" %}?crypto=" + selectedCrypto + "&currency=" + selectedCurrency;
             form.submit();
         }
     </script>
