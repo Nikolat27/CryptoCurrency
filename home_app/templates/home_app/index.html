@@ -3,18 +3,21 @@
 {% block content %}
     <div class="container" align="center">
         <h1>Cryptocurrency Prices</h1>
-        <img src="{% static "img/laravel.png" %}" width="300" height="300" alt="">
+        <img src="{% static "img/index_page_pic.jpg" %}"
+             width="auto" height="300" alt="">
         <div class="conversion">
-            <input type="number" id="amount" placeholder="Enter Amount">
-            <br><br>
-            <label style="text-align: center" for="cryptos" class="form-label">Choose your Crypto from the list:</label>
-            <input class="form-control" list="cryptos" name="cryptos" id="cryptos" style="width: auto">
-            <datalist id="browsers">
-                <option value="Bitcoin">
-                <option value="Ethereum">
-            </datalist>
-            <button>Convert</button>
-            <p id="result"></p>
+            <p><span style="font-weight: Bold">Cryptocurrency – meaning and definition:</span>
+                <br>
+                Cryptocurrency, sometimes called crypto-currency or crypto, is any form of currency that exists
+                digitally or virtually and uses cryptography to secure transactions. Cryptocurrencies don't have a
+                central issuing or regulating authority, instead using a decentralized system to record transactions and
+                issue new units.</p>
+
+            <hr>
+
+            <p style="font-weight: bold">This website is usefull for converting and inquring crypto prices.
+                <br>
+                Note: I used <span style="color: red;">"https://www.coingecko.com/"</span> apis</p>
         </div>
     </div>
 {% endblock %}
